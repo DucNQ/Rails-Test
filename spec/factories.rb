@@ -9,4 +9,10 @@ FactoryGirl.define do
     	admin true
     end
   end
+
+  factory :entry do
+    sequence(:title) { |n| "Entry No.#{n}" }
+    sequence(:body) { |n| "Body of entry No.#{n}" }
+    user
+  end
 end

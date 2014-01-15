@@ -18,7 +18,7 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
-  it { should respond_to(:admin) }
+  it { should respond_to(:entries) }
   it { should respond_to(:feed) }
   it { should respond_to(:relationships) }
   it { should respond_to(:followed_users) }
@@ -26,17 +26,7 @@ describe User do
   it { should respond_to(:reverse_relationships) }
   it { should respond_to(:followers) }
 
-  it { should be_valid }  
-  it { should_not be_admin }
-
-  describe "with admin attribute set to 'true' " do
-    before do
-      @user.save!
-      @user.toggle!(:admin)
-    end
-
-    it {should be_admin}
-  end
+  it { should be_valid } 
   
   describe "When name is not present" do
   	before { @user.name = " " }
@@ -158,6 +148,20 @@ describe User do
 
       it { should_not be_following(other_user) }
       its(:followed_users) { should_not include(other_user) }
+    end
+  end
+
+  describe "Entry association" do
+    before { @user.save }
+    let!(:older_entry) do
+      FactoryGirl.create :entry, user: @user, created_at: 1.day.ago
+    end
+    let!(:newer_entry) do
+      FactoryGirl.create :entry, user: @user, created_at: 1.hour.ago
+    end
+
+    it "should have the right order" do
+      expect(@user.entries.to_a).to eq [newer_entry, older_entry]
     end
   end
 end

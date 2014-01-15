@@ -214,9 +214,9 @@ input {
 	}
 }
 
-/* microposts */
+/* entries */
 
-.microposts {
+.entries {
 	
 	list-style: none;
 	margin: 10px 0 0 0;
@@ -227,7 +227,12 @@ input {
 	}
 }
 
-.content {
+.title {
+	font-weight: bold;
+	color: #0000FF;
+}
+
+.body {
 	display: block;
 }
 .timestamp {
