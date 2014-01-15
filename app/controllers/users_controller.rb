@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+  before_action :signed_in_user,    only: [:index, :destroy]
+  before_action :already_signed_in, only: [:new]
   def index
     @users = User.paginate(page: params[:page])
   end
@@ -23,7 +24,24 @@ class UsersController < ApplicationController
   end
 
   private
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_url, notice: "Please sign in."
+    end
+  end
+
+  def already_signed_in
+    if signed_in?
+      redirect_to user_path(@current_user)
+    end
+  end
+
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def store_location
+    session[:return_to] = request.url if request.get?
   end
 end
