@@ -230,10 +230,12 @@ input {
 .title {
 	font-weight: bold;
 	color: #0000FF;
+	display: block;
 }
 
 .body {
 	display: block;
+	text-align: justify;
 }
 .timestamp {
 	color: $grayLight;
