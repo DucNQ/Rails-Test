@@ -17,7 +17,7 @@ class EntriesController < ApplicationController
   end
 
   def show
-  	@entry = Entry.find_by(params[:id])
+  	@entry = Entry.find(params[:id])
     @comments = @entry.comments
     @comment = Comment.new
   end
@@ -30,6 +30,7 @@ class EntriesController < ApplicationController
   def comment 
     render root_url
   end
+
   private
   def entry_params
     params.require(:entry).permit(:title, :body)

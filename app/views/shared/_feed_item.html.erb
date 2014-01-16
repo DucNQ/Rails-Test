@@ -8,7 +8,7 @@
   </span>
   <span class="body"><%= feed_item.body %></span>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
+    Posted by <%= feed_item.created_at %>.
   </span>
   <% if signed_in? %>
       <% @comment_info = pluralize(feed_item.comments.count, "comment") %>

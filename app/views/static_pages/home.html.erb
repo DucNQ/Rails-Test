@@ -21,4 +21,8 @@
 	</h2>
 	<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %> 
   </div>
+  <div class="span8">
+	<h3>User posts</h3>
+	<%= render 'shared/feed' %>
+  </div>
 <% end %>
