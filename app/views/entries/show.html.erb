@@ -1,0 +1,11 @@
+
+<h1><%= @entry.title %></h1>
+
+<div class="row">
+  <section>
+    <%= render 'shared/entry_form' %>
+  </section>
+  <% if signed_in? %>
+    <%= render 'shared/comment_form' %>
+  <% end %>
+</div>

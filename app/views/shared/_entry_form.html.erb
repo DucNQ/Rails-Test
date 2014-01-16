@@ -1,0 +1,17 @@
+<%= form_for(@entry) do |f| %>
+  <%= f.text_area :body, size: "30x20", disabled: 'disabled'%>
+  Comments
+  <% @comments.each do |comment| %>
+    <li>
+      <span>
+      <%= link_to gravatar_for(comment.user, size: 30), comment.user %>
+      <%= link_to comment.user.name, comment.user %>
+      </span>
+      <span class="body"><%= comment.content %></span>
+      <span class="timestamp">
+         Commented <%= time_ago_in_words(comment.created_at) %> ago.
+      </span>
+    </li>
+    <li class="divider"></li>
+  <% end %>
+<% end %>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user,    only: [:index, :destroy]
+  before_action :signed_in_user,    only: [:index, :destroy, :following, :followers]
   before_action :already_signed_in, only: [:new]
   def index
     @users = User.paginate(page: params[:page])
@@ -23,6 +23,20 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
+  
+  def following
+    @title  = "Following"
+    @user   = User.find(params[:id])
+    @users  = @user.followed_users.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title  = "Followers"
+    @user   = User.find(params[:id])
+    @users  = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
 
   private
 
@@ -34,9 +48,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def store_location
-    session[:return_to] = request.url if request.get?
   end
 end
