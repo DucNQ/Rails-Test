@@ -2,7 +2,7 @@
   <span class="title"><%= entry.title %></span>
   <span class="body"><%= entry.body %></span>
   <span class="timestamp">
-    Posted from <%= entry.created_at %>.
+    Posted <%= time_ago_in_words(entry.created_at) %> ago at <%= entry.created_at.to_date %>.
   </span>
   
 </li>

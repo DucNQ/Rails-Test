@@ -1,5 +1,6 @@
 <%= form_for(@entry) do |f| %>
-  <%= f.text_area :body, size: "30x20", disabled: 'disabled'%>
+  <%= @entry.body %>
+  <li class="divider"></li>
   Comments
   <% @comments.each do |comment| %>
     <li>
@@ -9,7 +10,7 @@
       </span>
       <span class="body"><%= comment.content %></span>
       <span class="timestamp">
-         Commented <%= time_ago_in_words(comment.created_at) %> ago.
+         Posted <%= time_ago_in_words(comment.created_at) %> ago at <%= comment.created_at.to_date %>.
       </span>
     </li>
     <li class="divider"></li>

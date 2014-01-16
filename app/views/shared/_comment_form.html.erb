@@ -1,6 +1,6 @@
 <%= form_for @comment do |f| %>
 	<div class="field">
-		<%= f.text_area :content, placeholder: "Write new comment here..." %>
+		<%= f.text_field :content, placeholder: "Write new comment here..." %>
 		<%= f.hidden_field :user_id, value: current_user.id %>
 		<%= f.hidden_field :entry_id, value: @entry.id %>
 	</div>
